@@ -1,4 +1,4 @@
-import React,{ Component } from 'react';
+import React, { Component } from 'react';
 
 import Modal from '../../components/UI/Modal/Modal';
 import RAux from '../ReactAux/RAux'
@@ -10,11 +10,11 @@ const withErrorHandler = (WrappedComponent, axios) => {
         }
         componentWillMount() {
             this.reqInterceceptor = axios.interceptors.request.use(req => {
-                this.setState({error: null});
+                this.setState({ error: null });
                 return req;
             });
-            this.resInterceceptor = axios.interceptors.response.use(res => res,error => {
-                this.setState({error: error});
+            this.resInterceceptor = axios.interceptors.response.use(res => res, error => {
+                this.setState({ error: error });
             });
         }
 
@@ -25,17 +25,16 @@ const withErrorHandler = (WrappedComponent, axios) => {
         }
 
         errorConfirmedHandler = () => {
-            this.setState({error: null});
+            this.setState({ error: null });
         }
 
         render() {
             return (
                 <RAux>
-                    <Modal 
-                        show={this.setState.error}
+                    <Modal
+                        show={this.state.error}
                         modalClosed={this.errorConfirmedHandler}>
                         {this.state.error ? this.state.error.message : null}
-                        Something didn't work
                     </Modal>
                     <WrappedComponent {...this.props} />
                 </RAux>
